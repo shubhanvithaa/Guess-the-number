@@ -1,5 +1,5 @@
 # Guess-the-number
-Guess the number 
+Guess the number.
 
 It is a small demonstartion of python code to guess the number.
 
