@@ -12,6 +12,8 @@ def index():
         session['random_number'] = random.randint(1, 100)  # Random number to guess
         session['chances_left'] = 3  # User gets 3 chances
         session['last_guess'] = None  # Initialize last guess
+        session['hint'] = ''
+        session['message'] = ''
    
     if request.method == 'POST':
         
@@ -20,7 +22,7 @@ def index():
         return redirect(url_for('game', guess = session['last_guess']))  # Redirect to game logic
         
         
-    return render_template('index.html',chances_left=session['chances_left'],  num=session.get('last_guess'))
+    return render_template('index.html',chances_left=session['chances_left'],  num=session.get('last_guess'),hint = session['hint'],message = session['message'])
 
 @app.route('/game/<int:guess>', methods=["GET", "POST"])
 def game(guess):
@@ -51,18 +53,15 @@ def game(guess):
 
     # Provide hints
         if random_number > 90:
-            hint = "Hint: The number is between 90 and 100"
-            message = f"❌ Wrong guess! Try again! {random_number}"
-            
+            session['hint'] = "Hint: The number is between 90 and 100"   
         elif random_number < 10:
-            hint = "Hint: The number is between 0 and 10"
-            message = f"❌ Wrong guess! Try again! {random_number}"
-        
+            session['hint'] = "Hint: The number is between 0 and 10"
         else:
-            hint = f"Hint: The number is between {random_number - 10} and {random_number + 10}"
-            message = f"❌ Wrong guess! Try again! {random_number}"
-    return render_template('index.html', message=message, hint=hint, chances_left=chances_left,  num=session.get('last_guess'))
-    
+            session['hint']= f"Hint: The number is between {random_number - 10} and {random_number + 10}"
+
+    session['message'] = f"❌ Wrong guess! Try again!"
+    #return render_template('index.html', message=message, hint=hint, chances_left=chances_left,  num=session.get('last_guess'))
+    return redirect(url_for('index'))
     
 
 if __name__ == '__main__':
