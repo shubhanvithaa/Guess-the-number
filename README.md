@@ -1,4 +1,3 @@
-![image](https://github.com/user-attachments/assets/0f7f2987-7dfa-41ce-ab0c-b59a395047bf)Guess-the-number
 Guess the number.
 
 It is a small demonstration of python code to guess the number.
