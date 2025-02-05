@@ -60,7 +60,6 @@ def game(guess):
             session['hint']= f"Hint: The number is between {random_number - 10} and {random_number + 10}"
 
     session['message'] = f"❌ Wrong guess! Try again!"
-    #return render_template('index.html', message=message, hint=hint, chances_left=chances_left,  num=session.get('last_guess'))
     return redirect(url_for('index'))
     
 
